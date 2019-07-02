@@ -15,11 +15,6 @@ resource "aws_s3_bucket" "webacl_traffic_information" {
   region = "${data.aws_region.this.name}"
   acl    = "private"
 
-  logging {
-    target_bucket = "${lower(var.s3_logging_bucket)}"
-    target_prefix = "${lower(var.service_name)}-webacl-${data.aws_region.this.name}-${data.aws_caller_identity.this.account_id}-${random_id.this.hex}/"
-  }
-
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
